@@ -14,7 +14,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     customer = models.ForeignKey(Customer, related_name='customerOfOrder', on_delete=models.CASCADE, null=True)
     seller = models.ForeignKey(Seller, related_name='sellerOfProduct', on_delete=models.CASCADE, null=True)
-    delivery = models.ManyToManyField(Delivery, related_name='orders')
+    delivery = models.ManyToManyField(Delivery, related_name='delivery')
     is_delivered = models.BooleanField(default=False, null=True)
     is_paid = models.BooleanField(default=False, null=True)
 

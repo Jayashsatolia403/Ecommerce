@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Please click on the link below to confirm your registration:
+
+http://127.0.0.1:8000/delivery/activate/{{ uid }}/{{ token }}
+{% endautoescape %}

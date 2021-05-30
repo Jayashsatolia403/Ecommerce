@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import registration_view, addProductView, sellerAdmin
+from .views import registration_view, addProductView, sellerAdmin, activate
 
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path('register/', registration_view, name='register'),
     path('login/', obtain_auth_token, name='login'),
     path('addproduct/', addProductView, name='addproduct'),
-    path('sellerAdmin/', sellerAdmin, name='sellerAdmin')
+    path('sellerAdmin/', sellerAdmin, name='sellerAdmin'),
+    path('activate/<uidb64>/<token>/', activate, name='activate')
 ]

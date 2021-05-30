@@ -24,7 +24,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
             longitude = self.validated_data['longitude'],
             latitude = self.validated_data['latitude'],
             id_proof = self.validated_data['id_proof'],
-            is_seller = True
         )
         password = self.validated_data['password']
         password2 = self.validated_data['password2']

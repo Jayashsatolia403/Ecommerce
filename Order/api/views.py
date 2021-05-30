@@ -6,9 +6,9 @@ from Product.models import Product
 
 @api_view(['POST', ])
 def orderView(request, productKey):
-    orderedProduct = Product.objects.filter(id=productKey)
-    sellerOfProduct = orderedProduct[0].seller
-    serializer = OrderSerializer(data=request.data, context={'request': request, 'sellerOfProduct': sellerOfProduct})
+    orderedProduct = Product.objects.filter(id=productKey)[0]
+    sellerOfProduct = orderedProduct.seller
+    serializer = OrderSerializer(data=request.data, context={'request': request, 'orderedProduct': orderedProduct, 'sellerOfProduct': sellerOfProduct})
     data = {}
     
     if serializer.is_valid():

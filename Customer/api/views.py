@@ -16,6 +16,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.template.loader import get_template
 from django.contrib.sites.shortcuts import get_current_site
 
+from Order.models import Order
 
 
 
@@ -78,3 +79,13 @@ def activate(request, uidb64, token):
         return HttpResponse('Thanks for Confirmation! You can now login to your Account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+@api_view(['GET', ])
+def profile(request):
+    customer = request.user.customer
+
+    orders = Order.objects.filter(customer=customer)
+
+    data = {}
+    data['orders'] = [order for order in orders]

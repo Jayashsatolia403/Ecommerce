@@ -5,8 +5,6 @@ from rest_framework import serializers
 from Order.models import Order
 from Delivery.models import Delivery
 
-i = 0
-
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
@@ -15,7 +13,6 @@ class OrderSerializer(serializers.ModelSerializer):
     def save(self):
         global i
         NewOrder = Order(
-            id = i,
             customer = self.context['request'].user.customer,
             zipcode = self.validated_data['zipcode'],
             address = self.validated_data['address'],
@@ -31,9 +28,9 @@ class OrderSerializer(serializers.ModelSerializer):
         for deliveryForOrder in deliveryForOrders:
             distance = vincenty.vincenty((float(deliveryForOrder.longitude), float(deliveryForOrder.latitude)), (float(self.validated_data['longitude']), float(self.validated_data['latitude'])))
             if distance < 20:
-                print(deliveryForOrder)
                 NewOrder.delivery.add(deliveryForOrder)
-        i += 1
+
+        NewOrder.product.add(self.context['orderedProduct'])
 
         
         
